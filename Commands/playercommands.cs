@@ -49,15 +49,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_slay_message", callerName, player?.PlayerName ?? string.Empty]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_slay_message", callerName, player?.PlayerName ?? string.Empty]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_give")]
-		[RequiresPermissions("@css/cheats")]
+		[RequiresPermissions("@css/cvar")]
 		[CommandHelper(minArgs: 2, usage: "<#userid or name> <weapon>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnGiveCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -130,15 +130,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_give_message", callerName, player.PlayerName, weaponName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_give_message", callerName, player.PlayerName, weaponName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_strip")]
-		[RequiresPermissions("@css/slay")]
+		[RequiresPermissions("@css/cvar")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnStripCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -177,15 +177,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_strip_message", callerName, player?.PlayerName ?? string.Empty]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_strip_message", callerName, player?.PlayerName ?? string.Empty]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_hp")]
-		[RequiresPermissions("@css/slay")]
+		[RequiresPermissions("@css/cvar")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> <health>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnHpCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -225,15 +225,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_hp_message", callerName, player?.PlayerName ?? string.Empty]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_hp_message", callerName, player?.PlayerName ?? string.Empty]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_speed")]
-		[RequiresPermissions("@css/slay")]
+		[RequiresPermissions("@css/cvar")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> <speed>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnSpeedCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -274,15 +274,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_speed_message", callerName, player!.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_speed_message", callerName, player!.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_gravity")]
-		[RequiresPermissions("@css/slay")]
+		[RequiresPermissions("@css/cvar")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> <gravity>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnGravityCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -325,15 +325,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_gravity_message", callerName, player!.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_gravity_message", callerName, player!.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_money")]
-		[RequiresPermissions("@css/slay")]
+		[RequiresPermissions("@css/cvar")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> <money>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnMoneyCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -374,15 +374,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_money_message", callerName, player!.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_money_message", callerName, player!.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_god")]
-		[RequiresPermissions("@css/cheats")]
+		[RequiresPermissions("@css/permban")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnGodCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -429,8 +429,8 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_god_message", callerName, player.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_god_message", callerName, player.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
@@ -481,15 +481,15 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_slap_message", callerName, player.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_slap_message", callerName, player.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
 		}
 
 		[ConsoleCommand("css_team")]
-		[RequiresPermissions("@css/kick")]
+		[RequiresPermissions("@css/cvar")]
 		[CommandHelper(minArgs: 2, usage: "<#userid or name> [<ct/tt/spec>] [-k]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnTeamCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -573,8 +573,8 @@ namespace CS2_SimpleAdmin
 				{
 					using (new WithTemporaryCulture(controller.GetLanguage()))
 					{
-						StringBuilder sb = new(_localizer!["sa_prefix"]);
-						sb.Append(_localizer["sa_admin_team_message", callerName, player?.PlayerName ?? string.Empty, teamName]);
+						StringBuilder sb = new(_localizer!["sb_prefix"]);
+						sb.Append(_localizer["sb_admin_team_message", callerName, player?.PlayerName ?? string.Empty, teamName]);
 						controller.PrintToChat(sb.ToString());
 					}
 				}
@@ -587,7 +587,7 @@ namespace CS2_SimpleAdmin
 
 		[ConsoleCommand("css_rename", "Rename a player.")]
 		[CommandHelper(1, "<#userid or name> <new name>")]
-		[RequiresPermissions("@css/kick")]
+		[RequiresPermissions("@css/cvar")]
 		public void OnRenameCommand(CCSPlayerController? caller, CommandInfo command)
 		{
 			var callerName = caller == null ? "Console" : caller.PlayerName;
@@ -614,8 +614,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(controller.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_rename_message", callerName, player.PlayerName, newName]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_rename_message", callerName, player.PlayerName, newName]);
 							controller.PrintToChat(sb.ToString());
 						}
 					}
@@ -627,7 +627,7 @@ namespace CS2_SimpleAdmin
 
 		[ConsoleCommand("css_respawn", "Respawn a dead player.")]
 		[CommandHelper(1, "<#userid or name>")]
-		[RequiresPermissions("@css/cheats")]
+		[RequiresPermissions("@css/cvar")]
 		public void OnRespawnCommand(CCSPlayerController? caller, CommandInfo command)
 		{
 			var callerName = caller == null ? "Console" : caller.PlayerName;
@@ -669,8 +669,8 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_respawn_message", callerName, player.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_respawn_message", callerName, player.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
@@ -714,8 +714,8 @@ namespace CS2_SimpleAdmin
 				{
 					using (new WithTemporaryCulture(controller.GetLanguage()))
 					{
-						StringBuilder sb = new(_localizer!["sa_prefix"]);
-						sb.Append(_localizer["sa_admin_tp_message", caller.PlayerName, player.PlayerName]);
+						StringBuilder sb = new(_localizer!["sb_prefix"]);
+						sb.Append(_localizer["sb_admin_tp_message", caller.PlayerName, player.PlayerName]);
 						controller.PrintToChat(sb.ToString());
 					}
 				}
@@ -759,8 +759,8 @@ namespace CS2_SimpleAdmin
 				{
 					using (new WithTemporaryCulture(controller.GetLanguage()))
 					{
-						StringBuilder sb = new(_localizer!["sa_prefix"]);
-						sb.Append(_localizer["sa_admin_bring_message", caller.PlayerName, player.PlayerName]);
+						StringBuilder sb = new(_localizer!["sb_prefix"]);
+						sb.Append(_localizer["sb_admin_bring_message", caller.PlayerName, player.PlayerName]);
 						controller.PrintToChat(sb.ToString());
 					}
 				}

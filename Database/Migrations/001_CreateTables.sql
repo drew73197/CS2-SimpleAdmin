@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `sa_bans` (
+CREATE TABLE IF NOT EXISTS `sb_bans` (
                                 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                 `player_name` VARCHAR(128),
                                 `player_steamid` VARCHAR(64),
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `sa_bans` (
                                 `status` ENUM('ACTIVE', 'UNBANNED', 'EXPIRED', '') NOT NULL DEFAULT 'ACTIVE'
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sa_mutes` (
+CREATE TABLE IF NOT EXISTS `sb_mutes` (
 						 `id` int(11) NOT NULL AUTO_INCREMENT,
 						 `player_name` varchar(128) NULL,
 						 `player_steamid` varchar(64) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `sa_mutes` (
 						 PRIMARY KEY (`id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sa_admins` (
+CREATE TABLE IF NOT EXISTS `sb_admins` (
 						 `id` int(11) NOT NULL AUTO_INCREMENT,
 						 `player_name` varchar(128) NOT NULL,
 						 `player_steamid` varchar(64) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `sa_admins` (
 						 PRIMARY KEY (`id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sa_servers` (
+CREATE TABLE IF NOT EXISTS `sb_servers` (
 						 `id` int(11) NOT NULL AUTO_INCREMENT,
 						 `hostname` varchar(128) NOT NULL,
 						 `address` varchar(64) NOT NULL,

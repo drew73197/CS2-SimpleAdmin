@@ -25,12 +25,12 @@ namespace CS2_SimpleAdmin
 			var utf8String = Encoding.UTF8.GetString(utf8BytesString);
 
 			foreach (var player in Helper.GetValidPlayers()
-				         .Where(p => AdminManager.PlayerHasPermissions(p, "@css/chat")))
+				         .Where(p => AdminManager.PlayerHasPermissions(p, "@css/kick")))
 			{
 				using (new WithTemporaryCulture(player.GetLanguage()))
 				{
 					StringBuilder sb = new();
-					sb.Append(_localizer!["sa_adminchat_template_admin", caller == null ? "Console" : caller.PlayerName, utf8String]);
+					sb.Append(_localizer!["sb_adminchat_template_admin", caller == null ? "Console" : caller.PlayerName, utf8String]);
 					player.PrintToChat(sb.ToString());
 				}
 			}
@@ -54,7 +54,7 @@ namespace CS2_SimpleAdmin
 				using (new WithTemporaryCulture(player.GetLanguage()))
 				{
 					StringBuilder sb = new();
-					sb.Append(_localizer!["sa_adminsay_prefix", utf8String]);
+					sb.Append(_localizer!["sb_adminsay_prefix", utf8String]);
 					player.PrintToChat(sb.ToString());
 				}
 			}
@@ -62,7 +62,7 @@ namespace CS2_SimpleAdmin
 
 		[ConsoleCommand("css_psay", "Private message a player.")]
 		[CommandHelper(2, "<#userid or name> <message>")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		public void OnAdminPrivateSayCommand(CCSPlayerController? caller, CommandInfo command)
 		{
 			var callerName = caller == null ? "Console" : caller.PlayerName;

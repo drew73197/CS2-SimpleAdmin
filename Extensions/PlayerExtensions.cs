@@ -17,7 +17,7 @@ public static class PlayerExtensions
 
 	public static void Print(this CCSPlayerController controller, string message = "")
 	{
-		StringBuilder _message = new(CS2_SimpleAdmin._localizer!["sa_prefix"]);
+		StringBuilder _message = new(CS2_SimpleAdmin._localizer!["sb_prefix"]);
 		_message.Append(message);
 		controller.PrintToChat(_message.ToString());
 	}
@@ -121,7 +121,7 @@ public static class PlayerExtensions
 
 	public static void Rename(this CCSPlayerController? controller, string newName = "Unknown")
 	{
-		newName = newName ?? CS2_SimpleAdmin._localizer?["sa_unknown"] ?? "Unknown";
+		newName = newName ?? CS2_SimpleAdmin._localizer?["sb_unknown"] ?? "Unknown";
 
 		if (controller != null)
 		{

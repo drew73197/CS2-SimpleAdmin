@@ -12,16 +12,16 @@ namespace CS2_SimpleAdmin.Menus
 				return;
 
 			var localizer = CS2_SimpleAdmin._localizer;
-			if (AdminManager.PlayerHasPermissions(admin, "@css/generic") == false)
+			if (AdminManager.PlayerHasPermissions(admin, "@css/kick") == false)
 			{
-				admin.PrintToChat(localizer?["sa_prefix"] ??
+				admin.PrintToChat(localizer?["sb_prefix"] ??
 				                  "[SimpleAdmin] " + 
-				                  (localizer?["sa_no_permission"] ?? "You do not have permissions to use this command")
+				                  (localizer?["sb_no_permission"] ?? "You do not have permissions to use this command")
 				);
 				return;
 			}
 
-			var menu = AdminMenu.CreateMenu(localizer?["sa_menu_custom_commands"] ?? "Custom Commands");
+			var menu = AdminMenu.CreateMenu(localizer?["sb_menu_custom_commands"] ?? "Custom Commands");
 			List<ChatMenuOptionData> options = [];
 
 			var customCommands = CS2_SimpleAdmin.Instance.Config.CustomServerCommands;

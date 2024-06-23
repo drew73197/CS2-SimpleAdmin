@@ -30,31 +30,31 @@ namespace CS2_SimpleAdmin.Menus
 				return;
 
 			var localizer = CS2_SimpleAdmin._localizer;
-			if (AdminManager.PlayerHasPermissions(admin, "@css/generic") == false)
+			if (AdminManager.PlayerHasPermissions(admin, "@css/kick") == false)
 			{
-				admin.PrintToChat(localizer?["sa_prefix"] ??
+				admin.PrintToChat(localizer?["sb_prefix"] ??
 				                  "[SimpleAdmin] " + 
-				                  (localizer?["sa_no_permission"] ?? "You do not have permissions to use this command")
+				                  (localizer?["sb_no_permission"] ?? "You do not have permissions to use this command")
 				                  );
 				return;
 			}
 
-			var menu = CreateMenu(localizer?["sa_title"] ?? "SimpleAdmin");
+			var menu = CreateMenu(localizer?["sb_title"] ?? "SimpleAdmin");
 			List<ChatMenuOptionData> options =
 			[
-				new ChatMenuOptionData(localizer?["sa_menu_players_manage"] ?? "Players Manage", () => ManagePlayersMenu.OpenMenu(admin)),
-				new ChatMenuOptionData(localizer?["sa_menu_server_manage"] ?? "Server Manage", () => ManageServerMenu.OpenMenu(admin)),
-				new ChatMenuOptionData(localizer?["sa_menu_fun_commands"] ?? "Fun Commands", () => FunActionsMenu.OpenMenu(admin)),
+				new ChatMenuOptionData(localizer?["sb_menu_players_manage"] ?? "Players Manage", () => ManagePlayersMenu.OpenMenu(admin)),
+				new ChatMenuOptionData(localizer?["sb_menu_server_manage"] ?? "Server Manage", () => ManageServerMenu.OpenMenu(admin)),
+				new ChatMenuOptionData(localizer?["sb_menu_fun_commands"] ?? "Fun Commands", () => FunActionsMenu.OpenMenu(admin)),
 			];
 
 			var customCommands = CS2_SimpleAdmin.Instance.Config.CustomServerCommands;
 			if (customCommands.Count > 0)
 			{
-				options.Add(new ChatMenuOptionData(localizer?["sa_menu_custom_commands"] ?? "Custom Commands", () => CustomCommandsMenu.OpenMenu(admin)));
+				options.Add(new ChatMenuOptionData(localizer?["sb_menu_custom_commands"] ?? "Custom Commands", () => CustomCommandsMenu.OpenMenu(admin)));
 			}
 
-			if (AdminManager.PlayerHasPermissions(admin, "@css/root"))
-				options.Add(new ChatMenuOptionData(localizer?["sa_menu_admins_manage"] ?? "Admins Manage", () => ManageAdminsMenu.OpenMenu(admin)));
+			if (AdminManager.PlayerHasPermissions(admin, "@css/cvar"))
+				options.Add(new ChatMenuOptionData(localizer?["sb_menu_admins_manage"] ?? "Admins Manage", () => ManageAdminsMenu.OpenMenu(admin)));
 
 			foreach (var menuOptionData in options)
 			{

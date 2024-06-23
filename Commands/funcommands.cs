@@ -11,7 +11,7 @@ namespace CS2_SimpleAdmin
 	{
 		[ConsoleCommand("css_noclip", "Noclip a player.")]
 		[CommandHelper(1, "<#userid or name>")]
-		[RequiresPermissions("@css/cheats")]
+		[RequiresPermissions("@css/permban")]
 		public void OnNoclipCommand(CCSPlayerController? caller, CommandInfo command)
 		{
 			var callerName = caller == null ? "Console" : caller.PlayerName;
@@ -44,8 +44,8 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_noclip_message", callerName, player.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_noclip_message", callerName, player.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
@@ -92,8 +92,8 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_freeze_message", callerName, player?.PlayerName ?? string.Empty]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_freeze_message", callerName, player?.PlayerName ?? string.Empty]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}
@@ -135,8 +135,8 @@ namespace CS2_SimpleAdmin
 			{
 				using (new WithTemporaryCulture(controller.GetLanguage()))
 				{
-					StringBuilder sb = new(_localizer!["sa_prefix"]);
-					sb.Append(_localizer["sa_admin_unfreeze_message", callerName, player.PlayerName]);
+					StringBuilder sb = new(_localizer!["sb_prefix"]);
+					sb.Append(_localizer["sb_admin_unfreeze_message", callerName, player.PlayerName]);
 					controller.PrintToChat(sb.ToString());
 				}
 			}

@@ -11,14 +11,14 @@ namespace CS2_SimpleAdmin
 	public partial class CS2_SimpleAdmin
 	{
 		[ConsoleCommand("css_gag")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> [time in minutes/0 perm] [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnGagCommand(CCSPlayerController? caller, CommandInfo command)
 		{
 			if (_database == null) return;
 			var callerName = caller == null ? "Console" : caller.PlayerName;
 
-			var reason = _localizer?["sa_unknown"] ?? "Unknown";
+			var reason = _localizer?["sb_unknown"] ?? "Unknown";
 
 			var targets = GetTarget(command);
 			if (targets == null) return;
@@ -81,7 +81,7 @@ namespace CS2_SimpleAdmin
 				{
 					using (new WithTemporaryCulture(player.GetLanguage()))
 					{
-						player.PrintToCenter(_localizer!["sa_player_gag_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
+						player.PrintToCenter(_localizer!["sb_player_gag_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
 					}
 				}
 
@@ -91,8 +91,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(controller.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_gag_message_perm", callerName, player.PlayerName, reason]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_gag_message_perm", callerName, player.PlayerName, reason]);
 							controller.PrintToChat(sb.ToString());
 						}
 					}
@@ -104,7 +104,7 @@ namespace CS2_SimpleAdmin
 				{
 					using (new WithTemporaryCulture(player.GetLanguage()))
 					{
-						player.PrintToCenter(_localizer!["sa_player_gag_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
+						player.PrintToCenter(_localizer!["sb_player_gag_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
 					}
 				}
 
@@ -114,8 +114,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(controller.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_gag_message_time", callerName, player.PlayerName, reason, time]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_gag_message_time", callerName, player.PlayerName, reason, time]);
 							controller.PrintToChat(sb.ToString());
 						}
 					}
@@ -129,7 +129,7 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_addgag")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<steamid> [time in minutes/0 perm] [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnAddGagCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -149,7 +149,7 @@ namespace CS2_SimpleAdmin
 
 			var steamid = steamId.SteamId64.ToString();
 
-			var reason = _localizer?["sa_unknown"] ?? "Unknown";
+			var reason = _localizer?["sb_unknown"] ?? "Unknown";
 
 			MuteManager muteManager = new(_database);
 
@@ -182,7 +182,7 @@ namespace CS2_SimpleAdmin
 						if (!player.IsBot && !player.IsHLTV)
 							using (new WithTemporaryCulture(player.GetLanguage()))
 							{
-								player.PrintToCenter(_localizer!["sa_player_gag_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
+								player.PrintToCenter(_localizer!["sb_player_gag_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
 							}
 
 						if (caller == null || !SilentPlayers.Contains(caller.Slot))
@@ -191,8 +191,8 @@ namespace CS2_SimpleAdmin
 							{
 								using (new WithTemporaryCulture(controller.GetLanguage()))
 								{
-									StringBuilder sb = new(_localizer!["sa_prefix"]);
-									sb.Append(_localizer["sa_admin_gag_message_perm", callerName, player.PlayerName, reason]);
+									StringBuilder sb = new(_localizer!["sb_prefix"]);
+									sb.Append(_localizer["sb_admin_gag_message_perm", callerName, player.PlayerName, reason]);
 									controller.PrintToChat(sb.ToString());
 								}
 							}
@@ -203,7 +203,7 @@ namespace CS2_SimpleAdmin
 						if (player is { IsBot: false, IsHLTV: false })
 							using (new WithTemporaryCulture(player.GetLanguage()))
 							{
-								player.PrintToCenter(_localizer!["sa_player_gag_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
+								player.PrintToCenter(_localizer!["sb_player_gag_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
 							}
 
 						if (caller == null || !SilentPlayers.Contains(caller.Slot))
@@ -212,8 +212,8 @@ namespace CS2_SimpleAdmin
 							{
 								using (new WithTemporaryCulture(controller.GetLanguage()))
 								{
-									StringBuilder sb = new(_localizer!["sa_prefix"]);
-									sb.Append(_localizer["sa_admin_gag_message_time", callerName, player.PlayerName, reason, time]);
+									StringBuilder sb = new(_localizer!["sb_prefix"]);
+									sb.Append(_localizer["sb_admin_gag_message_time", callerName, player.PlayerName, reason, time]);
 									controller.PrintToChat(sb.ToString());
 								}
 							}
@@ -241,7 +241,7 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_ungag")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<steamid or name> [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnUngagCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -350,14 +350,14 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_mute")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> [time in minutes/0 perm] [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnMuteCommand(CCSPlayerController? caller, CommandInfo command)
 		{
 			if (_database == null) return;
 			var callerName = caller == null ? "Console" : caller.PlayerName;
 
-			var reason = _localizer?["sa_unknown"] ?? "Unknown";
+			var reason = _localizer?["sb_unknown"] ?? "Unknown";
 
 			var targets = GetTarget(command);
 			if (targets == null) return;
@@ -419,7 +419,7 @@ namespace CS2_SimpleAdmin
 				if (!player.IsBot && !player.IsHLTV)
 					using (new WithTemporaryCulture(player.GetLanguage()))
 					{
-						player.PrintToCenter(_localizer!["sa_player_mute_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
+						player.PrintToCenter(_localizer!["sb_player_mute_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
 					}
 
 				if (caller == null || !SilentPlayers.Contains(caller.Slot))
@@ -428,8 +428,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(controller.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_mute_message_perm", callerName, player.PlayerName, reason]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_mute_message_perm", callerName, player.PlayerName, reason]);
 							controller.PrintToChat(sb.ToString());
 						}
 					}
@@ -440,7 +440,7 @@ namespace CS2_SimpleAdmin
 				if (player is { IsBot: false, IsHLTV: false })
 					using (new WithTemporaryCulture(player.GetLanguage()))
 					{
-						player.PrintToCenter(_localizer!["sa_player_mute_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
+						player.PrintToCenter(_localizer!["sb_player_mute_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
 					}
 				if (caller == null || !SilentPlayers.Contains(caller.Slot))
 				{
@@ -448,8 +448,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(controller.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_mute_message_time", callerName, player.PlayerName, reason, time]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_mute_message_time", callerName, player.PlayerName, reason, time]);
 							controller.PrintToChat(sb.ToString());
 						}
 					}
@@ -465,7 +465,7 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_addmute")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<steamid> [time in minutes/0 perm] [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnAddMuteCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -485,7 +485,7 @@ namespace CS2_SimpleAdmin
 
 			var steamid = steamId.SteamId64.ToString();
 
-			var reason = _localizer?["sa_unknown"] ?? "Unknown";
+			var reason = _localizer?["sb_unknown"] ?? "Unknown";
 
 			MuteManager muteManager = new(_database);
 
@@ -520,7 +520,7 @@ namespace CS2_SimpleAdmin
 						if (player is { IsBot: false, IsHLTV: false })
 							using (new WithTemporaryCulture(player.GetLanguage()))
 							{
-								player.PrintToCenter(_localizer!["sa_player_mute_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
+								player.PrintToCenter(_localizer!["sb_player_mute_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
 							}
 						if (caller == null || !SilentPlayers.Contains(caller.Slot))
 						{
@@ -528,8 +528,8 @@ namespace CS2_SimpleAdmin
 							{
 								using (new WithTemporaryCulture(controller.GetLanguage()))
 								{
-									StringBuilder sb = new(_localizer!["sa_prefix"]);
-									sb.Append(_localizer["sa_admin_mute_message_perm", callerName, player.PlayerName, reason]);
+									StringBuilder sb = new(_localizer!["sb_prefix"]);
+									sb.Append(_localizer["sb_admin_mute_message_perm", callerName, player.PlayerName, reason]);
 									controller.PrintToChat(sb.ToString());
 								}
 							}
@@ -540,7 +540,7 @@ namespace CS2_SimpleAdmin
 						if (player is { IsBot: false, IsHLTV: false })
 							using (new WithTemporaryCulture(player.GetLanguage()))
 							{
-								player.PrintToCenter(_localizer!["sa_player_mute_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
+								player.PrintToCenter(_localizer!["sb_player_mute_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
 							}
 						if (caller == null || !SilentPlayers.Contains(caller.Slot))
 						{
@@ -548,8 +548,8 @@ namespace CS2_SimpleAdmin
 							{
 								using (new WithTemporaryCulture(controller.GetLanguage()))
 								{
-									StringBuilder sb = new(_localizer!["sa_prefix"]);
-									sb.Append(_localizer["sa_admin_mute_message_time", callerName, player.PlayerName, reason, time]);
+									StringBuilder sb = new(_localizer!["sb_prefix"]);
+									sb.Append(_localizer["sb_admin_mute_message_time", callerName, player.PlayerName, reason, time]);
 									controller.PrintToChat(sb.ToString());
 								}
 							}
@@ -572,7 +572,7 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_unmute")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<steamid or name>", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnUnmuteCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -668,14 +668,14 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_silence")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> [time in minutes/0 perm] [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnSilenceCommand(CCSPlayerController? caller, CommandInfo command)
 		{
 			if (_database == null) return;
 			var callerName = caller == null ? "Console" : caller.PlayerName;
 
-			var reason = CS2_SimpleAdmin._localizer?["sa_unknown"] ?? "Unknown";
+			var reason = CS2_SimpleAdmin._localizer?["sb_unknown"] ?? "Unknown";
 
 			var targets = GetTarget(command);
 			if (targets == null) return;
@@ -740,7 +740,7 @@ namespace CS2_SimpleAdmin
 				{
 					using (new WithTemporaryCulture(player.GetLanguage()))
 					{
-						player.PrintToCenter(_localizer!["sa_player_silence_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
+						player.PrintToCenter(_localizer!["sb_player_silence_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
 					}
 				}
 
@@ -750,8 +750,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(controller.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_silence_message_perm", callerName, player.PlayerName, reason]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_silence_message_perm", callerName, player.PlayerName, reason]);
 							controller.PrintToChat(sb.ToString());
 						}
 					}
@@ -763,7 +763,7 @@ namespace CS2_SimpleAdmin
 				{
 					using (new WithTemporaryCulture(player.GetLanguage()))
 					{
-						player.PrintToCenter(_localizer!["sa_player_silence_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
+						player.PrintToCenter(_localizer!["sb_player_silence_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
 					}
 				}
 
@@ -773,8 +773,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(controller.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_silence_message_time", callerName, player.PlayerName, reason, time]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_silence_message_time", callerName, player.PlayerName, reason, time]);
 							controller.PrintToChat(sb.ToString());
 						}
 					}
@@ -789,7 +789,7 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_addsilence")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<#userid or name> [time in minutes/0 perm] [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnAddSilenceCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -808,7 +808,7 @@ namespace CS2_SimpleAdmin
 
 			var steamid = steamId.SteamId64.ToString();
 
-			var reason = _localizer?["sa_unknown"] ?? "Unknown";
+			var reason = _localizer?["sb_unknown"] ?? "Unknown";
 
 			MuteManager muteManager = new(_database);
 
@@ -846,7 +846,7 @@ namespace CS2_SimpleAdmin
 						if (player is { IsBot: false, IsHLTV: false })
 							using (new WithTemporaryCulture(player.GetLanguage()))
 							{
-								player.PrintToCenter(_localizer!["sa_player_silence_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
+								player.PrintToCenter(_localizer!["sb_player_silence_message_perm", reason, caller == null ? "Console" : caller.PlayerName]);
 							}
 						if (caller == null || !SilentPlayers.Contains(caller.Slot))
 						{
@@ -854,8 +854,8 @@ namespace CS2_SimpleAdmin
 							{
 								using (new WithTemporaryCulture(controller.GetLanguage()))
 								{
-									StringBuilder sb = new(_localizer!["sa_prefix"]);
-									sb.Append(_localizer["sa_admin_silence_message_perm", callerName, player.PlayerName, reason]);
+									StringBuilder sb = new(_localizer!["sb_prefix"]);
+									sb.Append(_localizer["sb_admin_silence_message_perm", callerName, player.PlayerName, reason]);
 									controller.PrintToChat(sb.ToString());
 								}
 							}
@@ -866,7 +866,7 @@ namespace CS2_SimpleAdmin
 						if (player is { IsBot: false, IsHLTV: false })
 							using (new WithTemporaryCulture(player.GetLanguage()))
 							{
-								player.PrintToCenter(_localizer!["sa_player_silence_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
+								player.PrintToCenter(_localizer!["sb_player_silence_message_time", reason, time, caller == null ? "Console" : caller.PlayerName]);
 							}
 						if (caller == null || !SilentPlayers.Contains(caller.Slot))
 						{
@@ -874,8 +874,8 @@ namespace CS2_SimpleAdmin
 							{
 								using (new WithTemporaryCulture(controller.GetLanguage()))
 								{
-									StringBuilder sb = new(_localizer!["sa_prefix"]);
-									sb.Append(_localizer["sa_admin_silence_message_time", callerName, player.PlayerName, reason, time]);
+									StringBuilder sb = new(_localizer!["sb_prefix"]);
+									sb.Append(_localizer["sb_admin_silence_message_time", callerName, player.PlayerName, reason, time]);
 									controller.PrintToChat(sb.ToString());
 								}
 							}
@@ -897,7 +897,7 @@ namespace CS2_SimpleAdmin
 		}
 
 		[ConsoleCommand("css_unsilence")]
-		[RequiresPermissions("@css/chat")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 1, usage: "<steamid or name> [reason]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnUnsilenceCommand(CCSPlayerController? caller, CommandInfo command)
 		{

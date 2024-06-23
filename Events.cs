@@ -52,24 +52,24 @@ public partial class CS2_SimpleAdmin
 				{
 					await using var connection = await _database.GetConnectionAsync();
 					var addressExists = await connection.ExecuteScalarAsync<bool>(
-						"SELECT COUNT(*) FROM sa_servers WHERE address = @address",
+						"SELECT COUNT(*) FROM sb_servers WHERE address = @address",
 						new { address });
 
 					if (!addressExists)
 					{
 						await connection.ExecuteAsync(
-							"INSERT INTO sa_servers (address, hostname) VALUES (@address, @hostname)",
+							"INSERT INTO sb_servers (address, hostname) VALUES (@address, @hostname)",
 							new { address, hostname });
 					}
 					else
 					{
 						await connection.ExecuteAsync(
-							"UPDATE `sa_servers` SET `hostname` = @hostname, `id` = `id` WHERE `address` = @address",
+							"UPDATE `sb_servers` SET `hostname` = @hostname, `id` = `id` WHERE `address` = @address",
 							new { address, hostname });
 					}
 
 					int? serverId = await connection.ExecuteScalarAsync<int>(
-						"SELECT `id` FROM `sa_servers` WHERE `address` = @address",
+						"SELECT `id` FROM `sb_servers` WHERE `address` = @address",
 						new { address });
 
 					ServerId = serverId;
@@ -316,19 +316,19 @@ public partial class CS2_SimpleAdmin
 
 		StringBuilder sb = new();
 
-		if (AdminManager.PlayerHasPermissions(player, "@css/chat"))
+		if (AdminManager.PlayerHasPermissions(player, "@css/kick"))
 		{
-			sb.Append(_localizer!["sa_adminchat_template_admin", player.PlayerName, info.GetArg(1).Remove(0, 1)]);
-			foreach (var p in Utilities.GetPlayers().Where(p => p.IsValid && p is { IsBot: false, IsHLTV: false } && AdminManager.PlayerHasPermissions(p, "@css/chat")))
+			sb.Append(_localizer!["sb_adminchat_template_admin", player.PlayerName, info.GetArg(1).Remove(0, 1)]);
+			foreach (var p in Utilities.GetPlayers().Where(p => p.IsValid && p is { IsBot: false, IsHLTV: false } && AdminManager.PlayerHasPermissions(p, "@css/kick")))
 			{
 				p.PrintToChat(sb.ToString());
 			}
 		}
 		else
 		{
-			sb.Append(_localizer!["sa_adminchat_template_player", player.PlayerName, info.GetArg(1).Remove(0, 1)]);
+			sb.Append(_localizer!["sb_adminchat_template_player", player.PlayerName, info.GetArg(1).Remove(0, 1)]);
 			player.PrintToChat(sb.ToString());
-			foreach (var p in Utilities.GetPlayers().Where(p => p is { IsValid: true, IsBot: false, IsHLTV: false } && AdminManager.PlayerHasPermissions(p, "@css/chat")))
+			foreach (var p in Utilities.GetPlayers().Where(p => p is { IsValid: true, IsBot: false, IsHLTV: false } && AdminManager.PlayerHasPermissions(p, "@css/kick")))
 			{
 				p.PrintToChat(sb.ToString());
 			}
@@ -369,10 +369,14 @@ public partial class CS2_SimpleAdmin
 				Logger.LogError($"Using alternative method... Server IP {ipAddress}");
 			}
 
-			var address = $"{ipAddress}:{ConVar.Find("hostport")?.GetPrimitiveValue<int>()}";
+			//var address = $"{ipAddress}:{ConVar.Find("hostport")?.GetPrimitiveValue<int>()}";
 			var hostname = ConVar.Find("hostname")!.StringValue;
+			var IP = ipAddress;
+			var port = ConVar.Find("hostport")?.GetPrimitiveValue<int>();
+			var modid = 21;
+			var rcon = ConVar.Find("rcon_password")?.GetPrimitiveValue<string>();
 
-			Task.Run(async () =>
+            Task.Run(async () =>
 			{
 				PermissionManager adminManager = new(_database);
 
@@ -380,25 +384,19 @@ public partial class CS2_SimpleAdmin
 				{
 					await using var connection = await _database.GetConnectionAsync();
 					var addressExists = await connection.ExecuteScalarAsync<bool>(
-						"SELECT COUNT(*) FROM sa_servers WHERE address = @address",
-						new { address });
+						"SELECT COUNT(*) FROM `sb_servers` WHERE `ip` = @address AND `port` = @port",
+						new { IP, port });
 
 					if (!addressExists)
 					{
 						await connection.ExecuteAsync(
-							"INSERT INTO sa_servers (address, hostname) VALUES (@address, @hostname)",
-							new { address, hostname });
-					}
-					else
-					{
-						await connection.ExecuteAsync(
-							"UPDATE `sa_servers` SET `hostname` = @hostname, `id` = `id` WHERE `address` = @address",
-							new { address, hostname });
+							"INSERT INTO `sb_servers` (ip, port, rcon, modid) VALUES (@ip, @port, rcon, @modid)",
+							new { IP, port, modid });
 					}
 
 					int? serverId = await connection.ExecuteScalarAsync<int>(
-						"SELECT `id` FROM `sa_servers` WHERE `address` = @address",
-						new { address });
+						"SELECT `id` FROM `sb_servers` WHERE `ip` = @IP AND `port` = @port",
+						new { IP, port });
 
 					ServerId = serverId;
 				}
@@ -409,7 +407,7 @@ public partial class CS2_SimpleAdmin
 
 				if (Config.EnableMetrics)
 				{
-					var queryString = $"?address={address}&hostname={hostname}";
+					var queryString = $"?address={IP}:{port}&hostname={hostname}";
 					using HttpClient client = new();
 
 					try
@@ -441,9 +439,6 @@ public partial class CS2_SimpleAdmin
 				PermissionManager adminManager = new(_database);
 				BanManager banManager = new(_database, Config);
 				MuteManager muteManager = new(_database);
-
-				await banManager.ExpireOldBans();
-				await adminManager.DeleteOldAdmins();
 
 				BannedPlayers.Clear();
 

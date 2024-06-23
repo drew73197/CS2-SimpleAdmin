@@ -11,29 +11,29 @@ namespace CS2_SimpleAdmin.Menus
 				return;
 
 			var localizer = CS2_SimpleAdmin._localizer;
-			if (AdminManager.PlayerHasPermissions(admin, "@css/generic") == false)
+			if (AdminManager.PlayerHasPermissions(admin, "@css/kick") == false)
 			{
-				admin.PrintToChat(localizer?["sa_prefix"] ??
+				admin.PrintToChat(localizer?["sb_prefix"] ??
 								  "[SimpleAdmin] " +
-								  (localizer?["sa_no_permission"] ?? "You do not have permissions to use this command")
+								  (localizer?["sb_no_permission"] ?? "You do not have permissions to use this command")
 				);
 				return;
 			}
 
-			var menu = AdminMenu.CreateMenu(localizer?["sa_menu_server_manage"] ?? "Server Manage");
+			var menu = AdminMenu.CreateMenu(localizer?["sb_menu_server_manage"] ?? "Server Manage");
 			List<ChatMenuOptionData> options = [];
 
 			// permissions
-			bool hasMap = AdminManager.PlayerHasPermissions(admin, "@css/changemap");
+			bool hasMap = AdminManager.PlayerHasPermissions(admin, "@css/changelevel");
 
 			// options added in order
 
 			if (hasMap)
 			{
-				options.Add(new ChatMenuOptionData(localizer?["sa_changemap"] ?? "Change Map", () => ChangeMapMenu(admin)));
+				options.Add(new ChatMenuOptionData(localizer?["sb_changemap"] ?? "Change Map", () => ChangeMapMenu(admin)));
 			}
 
-			options.Add(new ChatMenuOptionData(localizer?["sa_restart_game"] ?? "Restart Game", () => CS2_SimpleAdmin.RestartGame(admin)));
+			options.Add(new ChatMenuOptionData(localizer?["sb_restart_game"] ?? "Restart Game", () => CS2_SimpleAdmin.RestartGame(admin)));
 
 			foreach (var menuOptionData in options)
 			{
@@ -46,7 +46,7 @@ namespace CS2_SimpleAdmin.Menus
 
 		private static void ChangeMapMenu(CCSPlayerController admin)
 		{
-			var menu = AdminMenu.CreateMenu(CS2_SimpleAdmin._localizer?["sa_changemap"] ?? "Change Map");
+			var menu = AdminMenu.CreateMenu(CS2_SimpleAdmin._localizer?["sb_changemap"] ?? "Change Map");
 			List<ChatMenuOptionData> options = [];
 
 			var maps = CS2_SimpleAdmin.Instance.Config.DefaultMaps;

@@ -1,4 +1,4 @@
-{GREEN}[ CS2-SimpleAdmin HELP ]{DEFAULT}
+{GREEN}[ CS2-SourceBans HELP ]{DEFAULT}
 - css_who <#userid or name>  - Display informations about player
 - css_players - Display player list
 - css_ban <#userid or name> [time in minutes/0 perm] [reason] - Ban player

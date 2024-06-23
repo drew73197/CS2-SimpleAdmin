@@ -11,24 +11,24 @@ namespace CS2_SimpleAdmin.Menus
 				return;
 
 			var localizer = CS2_SimpleAdmin._localizer;
-			if (AdminManager.PlayerHasPermissions(admin, "@css/root") == false)
+			if (AdminManager.PlayerHasPermissions(admin, "@css/cvar") == false)
 			{
-				admin.PrintToChat(localizer?["sa_prefix"] ??
+				admin.PrintToChat(localizer?["sb_prefix"] ??
 				                  "[SimpleAdmin] " + 
-				                  (localizer?["sa_no_permission"] ?? "You do not have permissions to use this command")
+				                  (localizer?["sb_no_permission"] ?? "You do not have permissions to use this command")
 				);
 				return;
 			}
 
-			var menu = AdminMenu.CreateMenu(localizer?["sa_menu_admins_manage"] ?? "Admins Manage");
+			var menu = AdminMenu.CreateMenu(localizer?["sb_menu_admins_manage"] ?? "Admins Manage");
 			List<ChatMenuOptionData> options =
 			[
-				new ChatMenuOptionData(localizer?["sa_admin_add"] ?? "Add Admin",
-					() => PlayersMenu.OpenRealPlayersMenu(admin, localizer?["sa_admin_add"] ?? "Add Admin", AddAdminMenu)),
-				new ChatMenuOptionData(localizer?["sa_admin_remove"] ?? "Remove Admin",
-					() => PlayersMenu.OpenAdminPlayersMenu(admin, localizer?["sa_admin_remove"] ?? "Remove Admin", RemoveAdmin,
+				new ChatMenuOptionData(localizer?["sb_admin_add"] ?? "Add Admin",
+					() => PlayersMenu.OpenRealPlayersMenu(admin, localizer?["sb_admin_add"] ?? "Add Admin", AddAdminMenu)),
+				new ChatMenuOptionData(localizer?["sb_admin_remove"] ?? "Remove Admin",
+					() => PlayersMenu.OpenAdminPlayersMenu(admin, localizer?["sb_admin_remove"] ?? "Remove Admin", RemoveAdmin,
 						player => player != admin && admin.CanTarget(player))),
-				new ChatMenuOptionData(localizer?["sa_admin_reload"] ?? "Reload Admins", () => ReloadAdmins(admin))
+				new ChatMenuOptionData(localizer?["sb_admin_reload"] ?? "Reload Admins", () => ReloadAdmins(admin))
 			];
 
 			foreach (var menuOptionData in options)
@@ -42,7 +42,7 @@ namespace CS2_SimpleAdmin.Menus
 
 		private static void AddAdminMenu(CCSPlayerController admin, CCSPlayerController player)
 		{
-			var menu = AdminMenu.CreateMenu($"{CS2_SimpleAdmin._localizer?["sa_admin_add"] ?? "Add Admin"}: {player.PlayerName}");
+			var menu = AdminMenu.CreateMenu($"{CS2_SimpleAdmin._localizer?["sb_admin_add"] ?? "Add Admin"}: {player.PlayerName}");
 
 			foreach (var adminFlag in CS2_SimpleAdmin.Instance.Config.MenuConfigs.AdminFlags)
 			{

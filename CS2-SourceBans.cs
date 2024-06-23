@@ -34,10 +34,10 @@ public partial class CS2_SimpleAdmin : BasePlugin, IPluginConfig<CS2_SimpleAdmin
 	internal static ILogger? _logger;
 
 	private static MemoryFunctionVoid<CBasePlayerController, CCSPlayerPawn, bool, bool>? _cBasePlayerControllerSetPawnFunc;
-	public override string ModuleName => "CS2-SimpleAdmin" + (Helper.IsDebugBuild ? " (DEBUG)" : " (RELEASE)");
-	public override string ModuleDescription => "Simple admin plugin for Counter-Strike 2 :)";
-	public override string ModuleAuthor => "daffyy & Dliix66";
-	public override string ModuleVersion => "1.4.6b";
+	public override string ModuleName => "CS2-SourceBans" + (Helper.IsDebugBuild ? " (DEBUG)" : " (RELEASE)");
+	public override string ModuleDescription => "Source Bans for Counter-Strike 2";
+	public override string ModuleAuthor => "daffyy & Dliix66 Modified by Reo";
+	public override string ModuleVersion => "1.0SB";
 
 	public CS2_SimpleAdminConfig Config { get; set; } = new();
 
@@ -73,7 +73,7 @@ public partial class CS2_SimpleAdmin : BasePlugin, IPluginConfig<CS2_SimpleAdmin
 	{
 		if (config.DatabaseHost.Length < 1 || config.DatabaseName.Length < 1 || config.DatabaseUser.Length < 1)
 		{
-			throw new Exception("[CS2-SimpleAdmin] You need to setup Database credentials in config!");
+			throw new Exception("[CS2-SourceBans] You need to setup Database credentials in config!");
 		}
 
 		Instance = this;

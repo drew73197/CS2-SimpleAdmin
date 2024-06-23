@@ -1,14 +1,14 @@
-INSERT INTO sa_admins_flags (admin_id, flag)
+INSERT INTO sb_admins_flags (admin_id, flag)
 SELECT 
     min_admins.admin_id,
-    TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(sa_admins.flags, ',', numbers.n), ',', -1)) AS flag
+    TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(sb_admins.flags, ',', numbers.n), ',', -1)) AS flag
 FROM (
     SELECT MIN(id) AS admin_id, player_steamid, server_id
-    FROM sa_admins
+    FROM sb_admins
     WHERE player_steamid != 'Console'
     GROUP BY player_steamid, server_id
 ) AS min_admins
-JOIN sa_admins ON min_admins.player_steamid = sa_admins.player_steamid
+JOIN sb_admins ON min_admins.player_steamid = sb_admins.player_steamid
 JOIN (
     SELECT 1 AS n UNION ALL
     SELECT 2 UNION ALL
@@ -31,6 +31,6 @@ JOIN (
     SELECT 19 UNION ALL
     SELECT 20 
 ) AS numbers
-ON CHAR_LENGTH(sa_admins.flags) - CHAR_LENGTH(REPLACE(sa_admins.flags, ',', '')) >= numbers.n - 1
-AND (min_admins.server_id = sa_admins.server_id OR (min_admins.server_id IS NULL AND sa_admins.server_id IS NULL))
-WHERE sa_admins.id IS NOT NULL;
+ON CHAR_LENGTH(sb_admins.flags) - CHAR_LENGTH(REPLACE(sb_admins.flags, ',', '')) >= numbers.n - 1
+AND (min_admins.server_id = sb_admins.server_id OR (min_admins.server_id IS NULL AND sb_admins.server_id IS NULL))
+WHERE sb_admins.id IS NOT NULL;

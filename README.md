@@ -1,4 +1,4 @@
-# CS2-SimpleAdmin
+# CS2-SourceBans
 
 ### Do you appreciate what I do? Buy me a cup of tea ❤️
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y4THKXG)
@@ -67,10 +67,10 @@ Manage your Counter-Strike 2 server by simple commands :)
 
 
 ### Configuration
-After first launch, u need to configure plugin in  addons/counterstrikesharp/configs/plugins/CS2-SimpleAdmin/CS2-SimpleAdmin.json
+After first launch, u need to configure plugin in  addons/counterstrikesharp/configs/plugins/CS2-SourceBans/CS2-SourceBans.json
 
 ### Metrics
-From version 1.3.7a, CS2-SimpleAdmin now initiates metrics data collection. This includes gathering essential information such as the `server name`, `server address` and `country`.
+From version 1.3.7a, CS2-SourceBans now initiates metrics data collection. This includes gathering essential information such as the `server name`, `server address` and `country`.
 You can disable metrics by set `EnableMetrics` to false in plugin configuration.
 
 ### Colors

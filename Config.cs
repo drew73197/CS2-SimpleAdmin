@@ -33,7 +33,7 @@ namespace CS2_SimpleAdmin
 	public class CustomServerCommandData
 	{
 		[JsonPropertyName("Flag")]
-		public string Flag { get; set; } = "@css/generic";
+		public string Flag { get; set; } = "c";
 
 		[JsonPropertyName("DisplayName")]
 		public string DisplayName { get; set; } = "";
@@ -94,19 +94,31 @@ namespace CS2_SimpleAdmin
 		[JsonPropertyName("AdminFlags")]
 		public AdminFlag[] AdminFlags { get; set; } =
 		[
+			/*new AdminFlag { Name = "Generic", Flag = "c" },
+			new AdminFlag { Name = "Chat", Flag = "c" },
+			new AdminFlag { Name = "Change Map", Flag = "g" },
+			new AdminFlag { Name = "Slay", Flag = "f" },
+			new AdminFlag { Name = "Kick", Flag = "c" },
+			new AdminFlag { Name = "Ban", Flag = "d" },
+			new AdminFlag { Name = "Perm Ban", Flag = "d" },
+			new AdminFlag { Name = "Unban", Flag = "d" },
+			new AdminFlag { Name = "Show IP", Flag = "d" },
+			new AdminFlag { Name = "Cvar", Flag = "h" },
+			new AdminFlag { Name = "Rcon", Flag = "m" },
+			new AdminFlag { Name = "Root (all flags)", Flag = "z" }*/
 			new AdminFlag { Name = "Generic", Flag = "@css/generic" },
-			new AdminFlag { Name = "Chat", Flag = "@css/chat" },
-			new AdminFlag { Name = "Change Map", Flag = "@css/changemap" },
-			new AdminFlag { Name = "Slay", Flag = "@css/slay" },
-			new AdminFlag { Name = "Kick", Flag = "@css/kick" },
-			new AdminFlag { Name = "Ban", Flag = "@css/ban" },
-			new AdminFlag { Name = "Perm Ban", Flag = "@css/permban" },
-			new AdminFlag { Name = "Unban", Flag = "@css/unban" },
-			new AdminFlag { Name = "Show IP", Flag = "@css/showip" },
-			new AdminFlag { Name = "Cvar", Flag = "@css/cvar" },
-			new AdminFlag { Name = "Rcon", Flag = "@css/rcon" },
-			new AdminFlag { Name = "Root (all flags)", Flag = "@css/root" }
-		];
+            new AdminFlag { Name = "Chat", Flag = "@css/chat" },
+            new AdminFlag { Name = "Change Map", Flag = "@css/changemap" },
+            new AdminFlag { Name = "Slay", Flag = "@css/slay" },
+            new AdminFlag { Name = "Kick", Flag = "@css/kick" },
+            new AdminFlag { Name = "Ban", Flag = "@css/ban" },
+            new AdminFlag { Name = "Perm Ban", Flag = "@css/permban" },
+            new AdminFlag { Name = "Unban", Flag = "@css/unban" },
+            new AdminFlag { Name = "Show IP", Flag = "@css/showip" },
+            new AdminFlag { Name = "Cvar", Flag = "@css/cvar" },
+            new AdminFlag { Name = "Rcon", Flag = "@css/rcon" },
+            new AdminFlag { Name = "Root (all flags)", Flag = "@css/root" }
+        ];
 	}
 
 	public class CS2_SimpleAdminConfig : BasePluginConfig

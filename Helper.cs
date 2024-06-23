@@ -171,10 +171,10 @@ namespace CS2_SimpleAdmin
 
 			var playerName = caller?.PlayerName ?? "Console";
 
-			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer["sa_unknown"];
+			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer["sb_unknown"];
 
 			CS2_SimpleAdmin.Instance.Logger.LogInformation($"{CS2_SimpleAdmin._localizer[
-				"sa_discord_log_command",
+				"sb_discord_log_command",
 				playerName, command.GetCommandString]}".Replace("HOSTNAME", hostname).Replace("**", ""));
 		}
 
@@ -185,15 +185,15 @@ namespace CS2_SimpleAdmin
 
 			var playerName = caller?.PlayerName ?? "Console";
 
-			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer["sa_unknown"];
+			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer["sb_unknown"];
 
-			CS2_SimpleAdmin.Instance.Logger.LogInformation($"{CS2_SimpleAdmin._localizer["sa_discord_log_command",
+			CS2_SimpleAdmin.Instance.Logger.LogInformation($"{CS2_SimpleAdmin._localizer["sb_discord_log_command",
 				playerName, command]}".Replace("HOSTNAME", hostname).Replace("**", ""));
 		}
 
 		public static IEnumerable<Embed> GenerateEmbedsDiscord(string title, string description, string thumbnailUrl, Color color, string[] fieldNames, string[] fieldValues, bool[] inlineFlags)
 		{
-			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer?["sa_unknown"] ?? "Unknown";
+			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer?["sb_unknown"] ?? "Unknown";
 			var address = $"{ConVar.Find("ip")?.StringValue}:{ConVar.Find("hostport")!.GetPrimitiveValue<int>()}";
 
 			description = description.Replace("{hostname}", hostname);
@@ -209,8 +209,8 @@ namespace CS2_SimpleAdmin
 
 			for (var i = 0; i < fieldNames.Length; i++)
 			{
-				fieldValues[i] = fieldValues[i].Replace("{hostname}", hostname ?? CS2_SimpleAdmin._localizer?["sa_unknown"] ?? "Unknown");
-				fieldValues[i] = fieldValues[i].Replace("{address}", address ?? CS2_SimpleAdmin._localizer?["sa_unknown"] ?? "Unknown");
+				fieldValues[i] = fieldValues[i].Replace("{hostname}", hostname ?? CS2_SimpleAdmin._localizer?["sb_unknown"] ?? "Unknown");
+				fieldValues[i] = fieldValues[i].Replace("{address}", address ?? CS2_SimpleAdmin._localizer?["sb_unknown"] ?? "Unknown");
 
 				embed.AddField(fieldNames[i], fieldValues[i], inlineFlags[i]);
 
@@ -229,7 +229,7 @@ namespace CS2_SimpleAdmin
 
 			var communityUrl = caller != null ? "<" + new SteamID(caller.SteamID).ToCommunityUrl() + ">" : "<https://steamcommunity.com/profiles/0>";
 			var callerName = caller != null ? caller.PlayerName : "Console";
-			discordWebhookClientLog.SendMessageAsync(Helper.GenerateMessageDiscord(localizer["sa_discord_log_command", $"[{callerName}]({communityUrl})", command.GetCommandString]));
+			discordWebhookClientLog.SendMessageAsync(Helper.GenerateMessageDiscord(localizer["sb_discord_log_command", $"[{callerName}]({communityUrl})", command.GetCommandString]));
 		}
 
 		public enum PenaltyType
@@ -254,31 +254,31 @@ namespace CS2_SimpleAdmin
 			var callerCommunityUrl = caller != null ? "<" + new SteamID(caller.SteamID).ToCommunityUrl() + ">" : "<https://steamcommunity.com/profiles/0>";
 			var targetCommunityUrl = target != null ? "<" + new SteamID(target.SteamID).ToCommunityUrl() + ">" : "<https://steamcommunity.com/profiles/0>";
 			var callerName = caller != null ? caller.PlayerName : "Console";
-			var targetName = target != null ? target.PlayerName : localizer["sa_unknown"];
-			var targetSteamId = target != null ? new SteamID(target.SteamID).SteamId2 : localizer["sa_unknown"];
+			var targetName = target != null ? target.PlayerName : localizer["sb_unknown"];
+			var targetSteamId = target != null ? new SteamID(target.SteamID).SteamId2 : localizer["sb_unknown"];
 
-			var time = duration != 0 ? ConvertMinutesToTime(duration) : localizer["sa_permanent"];
+			var time = duration != 0 ? ConvertMinutesToTime(duration) : localizer["sb_permanent"];
 
 			string[] fieldNames = [
-				localizer["sa_player"],
-				localizer["sa_steamid"],
-				localizer["sa_duration"],
-				localizer["sa_reason"],
-				localizer["sa_admin"]];
+				localizer["sb_player"],
+				localizer["sb_steamid"],
+				localizer["sb_duration"],
+				localizer["sb_reason"],
+				localizer["sb_admin"]];
 			string[] fieldValues = [$"[{targetName}]({targetCommunityUrl})", targetSteamId, time, reason, $"[{callerName}]({callerCommunityUrl})"];
 			bool[] inlineFlags = [true, true, true, false, false];
 
-			var hostname = ConVar.Find("hostname")?.StringValue ?? localizer["sa_unknown"];
+			var hostname = ConVar.Find("hostname")?.StringValue ?? localizer["sb_unknown"];
 
 			var embed = new EmbedBuilder
 			{
 				Title = penalty switch
 				{
-					PenaltyType.Ban => localizer["sa_discord_penalty_ban"],
-					PenaltyType.Mute => localizer["sa_discord_penalty_mute"],
-					PenaltyType.Gag => localizer["sa_discord_penalty_gag"],
-					PenaltyType.Silence => localizer["sa_discord_penalty_silence"],
-					_ => localizer["sa_discord_penalty_unknown"],
+					PenaltyType.Ban => localizer["sb_discord_penalty_ban"],
+					PenaltyType.Mute => localizer["sb_discord_penalty_mute"],
+					PenaltyType.Gag => localizer["sb_discord_penalty_gag"],
+					PenaltyType.Silence => localizer["sb_discord_penalty_silence"],
+					_ => localizer["sb_discord_penalty_unknown"],
 				},
 
 				Color = penalty switch
@@ -305,7 +305,7 @@ namespace CS2_SimpleAdmin
 
 		private static string GenerateMessageDiscord(string message)
 		{
-			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer?["sa_unknown"] ?? "Unknown";
+			var hostname = ConVar.Find("hostname")?.StringValue ?? CS2_SimpleAdmin._localizer?["sb_unknown"] ?? "Unknown";
 			var address = $"{ConVar.Find("ip")?.StringValue}:{ConVar.Find("hostport")!.GetPrimitiveValue<int>()}";
 
 			message = message.Replace("HOSTNAME", hostname);
@@ -376,10 +376,69 @@ namespace CS2_SimpleAdmin
 				? "<" + new SteamID(caller.SteamID).ToCommunityUrl() + ">"
 				: "<https://steamcommunity.com/profiles/0>";
 			CS2_SimpleAdmin.DiscordWebhookClientLog.SendMessageAsync(GenerateMessageDiscord(
-				CS2_SimpleAdmin._localizer["sa_discord_log_command", $"[{callerName}]({communityUrl})",
+				CS2_SimpleAdmin._localizer["sb_discord_log_command", $"[{callerName}]({communityUrl})",
 					commandString]));
 		}
-	}
+
+        public static string ToSteam2(string steamId)
+        {
+            if (string.IsNullOrWhiteSpace(steamId))
+            {
+                throw new ArgumentException("Invalid Steam ID.");
+            }
+
+            // Check if the input is already in Steam2 format
+            if (steamId.StartsWith("STEAM_"))
+            {
+                return steamId;
+            }
+
+            // Otherwise, assume it's a Steam64 ID and convert it
+            if (!ulong.TryParse(steamId, out var steamId64))
+            {
+                throw new ArgumentException("Invalid Steam64 ID.");
+            }
+
+            var authServer = steamId64 % 2;
+            var authId = (steamId64 - 76561197960265728UL) / 2;
+
+            return $"STEAM_0:{authServer}:{authId}";
+        }
+
+        public static string ToSteam64(string steam2Id)
+        {
+            if (string.IsNullOrWhiteSpace(steam2Id))
+            {
+                throw new ArgumentException("Invalid Steam ID.");
+            }
+
+            // Check if the input is already in Steam64 format
+            if (ulong.TryParse(steam2Id, out var steamId64))
+            {
+                return steam2Id;
+            }
+
+            // Otherwise, assume it's a Steam2 ID and convert it
+            if (!steam2Id.StartsWith("STEAM_"))
+            {
+                throw new ArgumentException("Invalid Steam2 ID.");
+            }
+
+            var parts = steam2Id.Split(':');
+            if (parts.Length != 3 || !int.TryParse(parts[1], out var authServer) || !int.TryParse(parts[2], out var authId))
+            {
+                throw new ArgumentException("Invalid Steam2 ID format.");
+            }
+
+            steamId64 = (ulong)(authId * 2) + 76561197960265728UL + (ulong)authServer;
+            return steamId64.ToString();
+        }
+
+
+    }
+
+
+    }
 
 	public static class PluginInfo
 	{
@@ -389,7 +448,7 @@ namespace CS2_SimpleAdmin
 
 			try
 			{
-				var response = await client.GetAsync("https://raw.githubusercontent.com/daffyyyy/CS2-SimpleAdmin/main/VERSION").ConfigureAwait(false);
+				var response = await client.GetAsync("https://raw.githubusercontent.com/daffyyyy/CS2-SourceBans/main/VERSION").ConfigureAwait(false);
 
 				if (response.IsSuccessStatusCode)
 				{
@@ -401,7 +460,7 @@ namespace CS2_SimpleAdmin
 					switch (comparisonResult)
 					{
 						case < 0:
-							logger.LogWarning("Plugin is outdated! Check https://github.com/daffyyyy/CS2-SimpleAdmin");
+							logger.LogWarning("Plugin is outdated! Check https://github.com/daffyyyy/CS2-SourceBans");
 							break;
 						case > 0:
 							logger.LogInformation("Probably dev version detected");
@@ -437,7 +496,7 @@ namespace CS2_SimpleAdmin
 			Console.WriteLine(" _____| ||   | | ||_|| ||   |    |       ||   |___ |   _   ||       || ||_|| ||   | | | |   |");
 			Console.WriteLine("|_______||___| |_|   |_||___|    |_______||_______||__| |__||______| |_|   |_||___| |_|  |__|");
 			Console.WriteLine("				>> Version: " + moduleVersion);
-			Console.WriteLine("		>> GitHub: https://github.com/daffyyyy/CS2-SimpleAdmin");
+			//Console.WriteLine("		>> GitHub: https://github.com/daffyyyy/CS2-SourceBans");
 			Console.WriteLine(" ");
 		}
 	}
@@ -463,4 +522,3 @@ namespace CS2_SimpleAdmin
 			return Encoding.UTF8.GetBytes(str);
 		}
 	}
-}

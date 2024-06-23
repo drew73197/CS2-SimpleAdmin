@@ -11,7 +11,7 @@ namespace CS2_SimpleAdmin
 	public partial class CS2_SimpleAdmin
 	{
 		[ConsoleCommand("css_vote")]
-		[RequiresPermissions("@css/generic")]
+		[RequiresPermissions("@css/kick")]
 		[CommandHelper(minArgs: 2, usage: "<question> [... options ...]", whoCanExecute: CommandUsage.CLIENT_AND_SERVER)]
 		public void OnVoteCommand(CCSPlayerController? caller, CommandInfo command)
 		{
@@ -38,9 +38,9 @@ namespace CS2_SimpleAdmin
 					using (new WithTemporaryCulture(player.GetLanguage()))
 					{
 						BaseMenu voteMenu = Config.UseChatMenu
-							? new ChatMenu(_localizer!["sa_admin_vote_menu_title", question])
-							: new CenterHtmlMenu(_localizer!["sa_admin_vote_menu_title", question], Instance);
-						//ChatMenu voteMenu = new(_localizer!["sa_admin_vote_menu_title", question]);
+							? new ChatMenu(_localizer!["sb_admin_vote_menu_title", question])
+							: new CenterHtmlMenu(_localizer!["sb_admin_vote_menu_title", question], Instance);
+						//ChatMenu voteMenu = new(_localizer!["sb_admin_vote_menu_title", question]);
 
 						for (var i = 2; i <= answersCount - 1; i++)
 						{
@@ -49,9 +49,9 @@ namespace CS2_SimpleAdmin
 
 						voteMenu.PostSelectAction = PostSelectAction.Close;
 
-						Helper.PrintToCenterAll(_localizer["sa_admin_vote_message", caller == null ? "Console" : caller.PlayerName, question]);
-						StringBuilder sb = new(_localizer["sa_prefix"]);
-						sb.Append(_localizer["sa_admin_vote_message", caller == null ? "Console" : caller.PlayerName, question]);
+						Helper.PrintToCenterAll(_localizer["sb_admin_vote_message", caller == null ? "Console" : caller.PlayerName, question]);
+						StringBuilder sb = new(_localizer["sb_prefix"]);
+						sb.Append(_localizer["sb_admin_vote_message", caller == null ? "Console" : caller.PlayerName, question]);
 						player.PrintToChat(sb.ToString());
 						
 						voteMenu.OpenToAll();
@@ -71,8 +71,8 @@ namespace CS2_SimpleAdmin
 					{
 						using (new WithTemporaryCulture(player.GetLanguage()))
 						{
-							StringBuilder sb = new(_localizer!["sa_prefix"]);
-							sb.Append(_localizer["sa_admin_vote_message_results", question]);
+							StringBuilder sb = new(_localizer!["sb_prefix"]);
+							sb.Append(_localizer["sb_admin_vote_message_results", question]);
 							player.PrintToChat(sb.ToString());
 						}
 					}
@@ -83,8 +83,8 @@ namespace CS2_SimpleAdmin
 						{
 							using (new WithTemporaryCulture(player.GetLanguage()))
 							{
-								StringBuilder sb = new(_localizer!["sa_prefix"]);
-								sb.Append(_localizer["sa_admin_vote_message_results_answer", key, value]);
+								StringBuilder sb = new(_localizer!["sb_prefix"]);
+								sb.Append(_localizer["sb_admin_vote_message_results_answer", key, value]);
 								player.PrintToChat(sb.ToString());
 							}
 						}
